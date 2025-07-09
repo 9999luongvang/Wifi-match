@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Bài toán cộng trừ</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef2f7;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .question {
+      font-size: 2em;
+      margin: 20px;
+      color: #0077cc;
+    }
+
+    .reload-btn {
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bài toán ngẫu nhiên</h1>
+  <div class="question" id="question">Đang tạo bài toán...</div>
+  <button class="reload-btn" onclick="generateQuestion()">Câu hỏi khác</button>
+
+  <script>
+    function generateQuestion() {
+      const operators = ['+', '-'];
+      let op = operators[Math.floor(Math.random() * operators.length)];
+
+      let a = Math.floor(Math.random() * 101);
+      let b = Math.floor(Math.random() * 101);
+
+      // Đảm bảo không âm trong phép trừ
+      if (op === '-' && a < b) {
+        [a, b] = [b, a];  // Đổi chỗ để a luôn ≥ b
+      }
+
+      const questionText = `${a} ${op} ${b} = ?`;
+      document.getElementById('question').textContent = questionText;
+    }
+
+    // Khởi tạo khi mở trang
+    window.onload = generateQuestion;
+  </script>
+</body>
+</html>
